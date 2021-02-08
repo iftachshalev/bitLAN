@@ -61,6 +61,9 @@ class Communication():
 		# loop until connection break
 		while True:
 			data = self.conn.recv(self.frame_size)
+			if len(data) < self.frame_size:
+				data += b'\x00' * (self.frame_size - len(data))
+			print('receiver: ', len(data))
 			if not data:
 				break
 
@@ -83,7 +86,7 @@ class Communication():
 				data = data + b'\x00' * (self.frame_size - len(data))
 
 			try:
-				self.conn.send(data)
+				self.conn.sendall(data)
 			except:
 				# connection closed
 				break
