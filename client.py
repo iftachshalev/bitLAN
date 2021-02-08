@@ -31,7 +31,7 @@ com.connect('192.168.1.153')
 with sd.InputStream(channels=1, callback=input_callback, dtype='int32', blocksize=block_size, samplerate=8000):
     sd.sleep(int(duration * 1000))
 
-with sd.OutputStream(channels=1, callback=output_callback, dtype='int32',  blocksize=block_size, samplerate=8000):
-    sd.sleep(int(duration * 1000))
+# with sd.OutputStream(channels=1, callback=output_callback, dtype='int32',  blocksize=block_size, samplerate=8000):
+#     sd.sleep(int(duration * 1000))
 
 com.close()
