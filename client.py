@@ -7,15 +7,15 @@ import numpy as np
 duration = 30
 
 
-def input_callback(indata, frames, time, status):
-    from_comp_buff.put(indata.tobytes())
-    print(from_comp_buff.qsize())
-
-
 def output_callback(outdata, frames, time, status):
-    print(from_sock_buff.qsize())
+    print('out:\t{}\t{}'.format(from_sock_buff.qsize(), status))
     data = from_sock_buff.get()
     outdata[:, 0] = np.frombuffer(data, dtype=np.int32)
+
+
+def input_callback(indata, frames, time, status):
+    print('in:\t{}\t{}'.format(from_comp_buff.qsize(), status))
+    from_comp_buff.put(indata.tobytes())
 
 
 sys.path.append(os.path.abspath('.'))

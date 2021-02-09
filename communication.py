@@ -34,7 +34,7 @@ class Communication():
 		"""Connect to user (client mode)"""
 		# connect
 		self.s.connect((ip_addr, self.port))
-		self.conn = self.s;
+		self.conn = self.s
 
 		# start workers
 		self.start_proccesses()
@@ -94,7 +94,7 @@ class Communication():
 		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		try:
 			# doesn't even have to be reachable
-	        s.connect(('10.255.255.255', 1))
+			s.connect(('10.255.255.255', 1))
 			IP = s.getsockname()[0]
 		except Exception:
 			IP = '127.0.0.1'
