@@ -13,19 +13,18 @@ class Communication():
 		self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		self.port = port	# communication port
 		self.conn = None	# connection handler
+		self.addr = None
 		self.frame_size = frame_size	# socket frame size
 
 	def listen(self):
 		"""Wait for connections (server mode)"""
 		# get my LAN ip address
 		my_ip = Communication.get_ip()
-		print('my IP is: {}'.format(my_ip))
 
 		# wait for connection
 		self.s.bind((my_ip, self.port))
 		self.s.listen()
-		self.conn, addr = self.s.accept()
-		print('connected by: ' + repr(addr))
+		self.conn, self.addr = self.s.accept()
 
 		# start workers
 		self.start_proccesses()

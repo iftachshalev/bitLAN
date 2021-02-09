@@ -1,0 +1,9 @@
+{
+    "frame_size": 2048,
+    "port": 12345,
+    "fs": 8000,
+    "data_type": "int32",
+    "bytes_per_sample": 4,
+    "duration": 30,
+    "debug": 1
+}
