@@ -29,6 +29,10 @@ with open('config.json') as json_file:
 from_sock_buff = Queue()
 from_comp_buff = Queue()
 
+data = b'\x00' * (self.frame_size)
+for i in range(2):
+	from_sock_buff.put()
+
 # init communication
 com = Communication(from_sock_buff, from_comp_buff, conf['port'], conf['frame_size'])
 
