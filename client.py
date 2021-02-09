@@ -29,10 +29,12 @@ block_size = int(frame_size / 4)
 com = Communication(from_sock_buff, from_comp_buff, port, frame_size)
 com.connect('192.168.1.153')
 
-with sd.InputStream(channels=1, callback=input_callback, dtype='int32', blocksize=block_size, samplerate=8000):
-    sd.sleep(int(duration * 1000))
+s_out = sd.OutputStream(channels=1, callback=output_callback, dtype='int32',  blocksize=block_size, samplerate=8000)
+s_in = sd.InputStream(channels=1, callback=input_callback, dtype='int32', blocksize=block_size, samplerate=8000)
 
-with sd.OutputStream(channels=1, callback=output_callback, dtype='int32',  blocksize=block_size, samplerate=8000):
-    sd.sleep(int(duration * 1000))
+time.sleep(duration)
+
+s_out.close()
+s_in.close()
 
 com.close()
