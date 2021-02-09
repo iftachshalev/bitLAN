@@ -60,19 +60,16 @@ class Communication():
 
 		# loop until connection break
 		while True:
-			data = self.conn.recv(self.frame_size)
-			if len(data) < self.frame_size:
-				data += b'\x00' * (self.frame_size - len(data))
-			print('receiver: ', len(data))
-			if not data:
-				break
+			data = []
+			# loop until all frame_size arrived from socket
+			while len(data) < self.frame_size:
+				data += self.conn.recv(self.frame_size - len(data))
+				if not data:
+					print('receiver: exit')
+					return
 
 			# put data into buffer (BLOCKING)
 			self.input_buffer.put(data)
-
-		print('receiver: exit')
-		# # raise error if connection broke
-		# raise RuntimeError("socket connection closed")
 
 	def transmmiter(self):
 		"""Receive data from queue and send it to socket"""
