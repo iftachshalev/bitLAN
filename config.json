@@ -4,6 +4,6 @@
     "fs": 8000,
     "data_type": "int32",
     "bytes_per_sample": 4,
-    "duration": 30,
+    "duration": 300,
     "debug": 1
 }
